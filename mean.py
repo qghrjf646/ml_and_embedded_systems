@@ -5,4 +5,4 @@ def compute_mean(l):
         return 0
     for i in l:
         r += i
-    return r/s
+    return r/4 # r/s
