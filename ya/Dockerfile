@@ -1,11 +1,11 @@
 FROM python:3.12
 WORKDIR /app/src
 
-COPY requirements.txt ./
+COPY ya/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy in the source code
-COPY src .
+COPY ya/src .
 
 # Setup an app user so the container doesn't run as the root user
 RUN useradd house_pred_app
