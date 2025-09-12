@@ -27,7 +27,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{secrets.GITHUB_TOKEN }}
+          password: ${{secrets.CR_PAT }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -36,3 +36,17 @@ jobs:
           file: ya/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/ya_house_pred_im:latest
+
+      - name: Pull the image on the VM and run the container
+        uses: appleboy/ssh-action@v1
+        with:
+          host: 20.229.168.115
+          username: ubuntu
+          key: ${{ secrets.VM_SSH_KEY }}
+          script: |
+            docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.CR_PAT }}
+            docker pull ghcr.io/${{ github.repository_owner }}/ya_house_pred_im:latest
+            docker run --rm -p 7844:7844 ghcr.io/${{ github.repository_owner }}/ya_house_pred_im:latest
+
+
+
