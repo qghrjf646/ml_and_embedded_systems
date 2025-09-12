@@ -1,2 +1,2 @@
 a = 2
-print("coucou", a)
+print("coucou, i'm more of a test", a)
