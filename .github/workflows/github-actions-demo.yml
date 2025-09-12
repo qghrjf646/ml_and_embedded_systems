@@ -36,6 +36,11 @@ jobs:
           file: ya/Dockerfile
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/ya_house_pred_im:latest
+       
+      - name: Debug SSH key format
+        run: |
+          echo "${{ secrets.VM_SSH_KEY }}" | head -5 | sed 's/./*/g'      
+
 
       - name: Pull the image on the VM and run the container
         uses: appleboy/ssh-action@v1
