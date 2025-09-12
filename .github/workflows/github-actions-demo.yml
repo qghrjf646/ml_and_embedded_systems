@@ -51,7 +51,7 @@ jobs:
           script: |
             docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.CR_PAT }}
             docker pull ghcr.io/${{ github.repository_owner }}/ya_house_pred_im:latest
-            docker run --rm -p 7844:7844 ghcr.io/${{ github.repository_owner }}/ya_house_pred_im:latest
+            docker run -d -p 7844:7844 ghcr.io/${{ github.repository_owner }}/ya_house_pred_im:latest
 
 
 
